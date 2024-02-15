@@ -15,8 +15,11 @@ var player: CharacterBody3D
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group('player')
 
-func _physics_process(delta: float) -> void:
+
+func _process(delta: float) -> void:
 	navigation_agent_3d.target_position = player.global_position
+
+func _physics_process(delta: float) -> void:
 	var next_position = navigation_agent_3d.get_next_path_position()
 	
 	# Add the gravity.
