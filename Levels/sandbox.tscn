@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2t8cplp6prl2"]
+[gd_scene load_steps=7 format=3 uid="uid://b2t8cplp6prl2"]
 
 [ext_resource type="PackedScene" uid="uid://1dm7xquufcns" path="res://Player/player.tscn" id="1_n1wis"]
 
@@ -15,6 +15,12 @@ sky = SubResource("Sky_y8st4")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjhxh"]
+albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eng5w"]
+albedo_color = Color(1, 0.592157, 0, 1)
+
 [node name="Sandbox" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -28,6 +34,35 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(64, 1, 64)
+material = SubResource("StandardMaterial3D_mjhxh")
 
 [node name="Player" parent="." instance=ExtResource("1_n1wis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Boxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+material_override = SubResource("StandardMaterial3D_eng5w")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0)
+material_override = SubResource("StandardMaterial3D_eng5w")
+use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 1)
+material_override = SubResource("StandardMaterial3D_eng5w")
+use_collision = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 1)
+material_override = SubResource("StandardMaterial3D_eng5w")
+use_collision = true
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 5)
+material_override = SubResource("StandardMaterial3D_eng5w")
+use_collision = true

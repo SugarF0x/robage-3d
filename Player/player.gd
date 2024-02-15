@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
 
-@export var jump_height := 1.0
+@export_range(0.5, 2.0) var jump_height := 1.0
+@export_range(1.0, 5.0) var fall_multiplier := 2.5
 
 
 @onready var camera_pivot: Node3D = %CameraPivot
@@ -43,7 +44,12 @@ func handle_camera_rotation() -> void:
 	
 	mouse_motion = Vector2.ZERO
 
-func handle_fall(delta: float) -> void: if not is_on_floor(): velocity.y -= gravity * delta
+func handle_fall(delta: float) -> void: 
+	if is_on_floor(): return
+	
+	if velocity.y >= 0: velocity.y -= gravity * delta
+	else: velocity.y -= gravity * delta * fall_multiplier
+
 func handle_jump() -> void: if Input.is_action_just_pressed("jump") and is_on_floor(): velocity.y = sqrt(jump_height * 2.0 * gravity)
 
 func handle_movement() -> void:
