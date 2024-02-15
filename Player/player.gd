@@ -1,11 +1,13 @@
 extends CharacterBody3D
 
 
+@export var jump_height := 1.0
+
+
 @onready var camera_pivot: Node3D = %CameraPivot
 
 
 const SPEED := 5.0
-const JUMP_VELOCITY := 4.5
 const MOUSE_SENSITIVITY := .003
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -42,7 +44,7 @@ func handle_camera_rotation() -> void:
 	mouse_motion = Vector2.ZERO
 
 func handle_fall(delta: float) -> void: if not is_on_floor(): velocity.y -= gravity * delta
-func handle_jump() -> void: if Input.is_action_just_pressed("jump") and is_on_floor(): velocity.y = JUMP_VELOCITY
+func handle_jump() -> void: if Input.is_action_just_pressed("jump") and is_on_floor(): velocity.y = sqrt(jump_height * 2.0 * gravity)
 
 func handle_movement() -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
