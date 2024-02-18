@@ -26,17 +26,28 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): velocity.y -= gravity * delta
 	
-	provoked = provoked or global_position.distance_to(player.global_position) <= aggro_range
+	check_aggro()
 	if not provoked: return
 	
+	apply_velocity()
+	move_and_slide()
+
+
+func check_aggro() -> void: provoked = provoked or global_position.distance_to(player.global_position) <= aggro_range
+
+func apply_velocity() -> void:
 	var next_position = navigation_agent_3d.get_next_path_position()
 	var direction := global_position.direction_to(next_position)
 	
 	if direction:
+		look_at_target(direction)
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	move_and_slide()
+func look_at_target(direction: Vector3) -> void:
+	var adjusted_direction = direction
+	adjusted_direction.y = 0
+	look_at(global_position + adjusted_direction, Vector3.UP, true)
