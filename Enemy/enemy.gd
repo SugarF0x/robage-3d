@@ -2,9 +2,11 @@ extends CharacterBody3D
 
 
 @export var aggro_range := 12.0
+@export var attack_range := 1.5
 
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 const SPEED = 5.0
@@ -29,11 +31,17 @@ func _physics_process(delta: float) -> void:
 	check_aggro()
 	if not provoked: return
 	
+	attack_sequence()
+	
 	apply_velocity()
 	move_and_slide()
 
 
 func check_aggro() -> void: provoked = provoked or global_position.distance_to(player.global_position) <= aggro_range
+
+func attack_sequence() -> void: if global_position.distance_to(player.global_position) <= attack_range: animation_player.play("Attack")
+
+func attak() -> void: print("Attack!")
 
 func apply_velocity() -> void:
 	var next_position = navigation_agent_3d.get_next_path_position()
