@@ -7,6 +7,7 @@ extends Node3D
 
 
 @onready var cooldown_timer: Timer = %CooldownTimer
+@onready var ray_cast_3d: RayCast3D = $RayCast3D
 
 
 func _ready() -> void:
@@ -20,8 +21,6 @@ func _process(delta: float) -> void:
 
 
 func shoot() -> void:
-	print("weapon fired")
-	
 	var fire_duration = 1.0 / fire_rate
 	cooldown_timer.start(fire_duration)
 	
@@ -29,3 +28,5 @@ func shoot() -> void:
 	recoil_tween.set_trans(Tween.TRANS_CUBIC)
 	recoil_tween.tween_property(weapon_mesh, "position", Vector3(weapon_mesh.position.x, weapon_mesh.position.y, weapon_mesh.position.z + recoil), fire_duration / 2)
 	recoil_tween.tween_property(weapon_mesh, "position", weapon_mesh.position, fire_duration / 2)
+	
+	print(ray_cast_3d.get_collider())

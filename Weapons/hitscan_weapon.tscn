@@ -5,6 +5,9 @@
 [node name="HitscanWeapon" type="Node3D"]
 script = ExtResource("1_jh2hx")
 
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)
+
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
