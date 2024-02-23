@@ -28,13 +28,26 @@ script = ExtResource("2_vcq0c")
 
 [node name="HitscanWeapon" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_dss5l")]
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHealthLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 87.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Health text"
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Crosshair" type="Control" parent="CenterContainer"]
+[node name="Crosshair" type="Control" parent="CanvasLayer/CenterContainer"]
 layout_mode = 2
 script = ExtResource("3_1s265")

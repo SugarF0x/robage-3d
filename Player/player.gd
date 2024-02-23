@@ -8,6 +8,7 @@ extends CharacterBody3D
 
 
 @onready var camera_pivot: Node3D = %CameraPivot
+@onready var player_health_label: Label = %PlayerHealthLabel
 
 
 const SPEED := 5.0
@@ -20,11 +21,13 @@ var mouse_motion := Vector2.ZERO
 var health := max_health:
 	set(value):
 		health = value
+		update_health_label()
 		if health <= 0: get_tree().quit()
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	update_health_label()
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
@@ -69,3 +72,5 @@ func handle_movement() -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+func update_health_label(): player_health_label.text = "Health: " + str(health)
