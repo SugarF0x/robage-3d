@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var aggro_range := 12.0
 @export var attack_range := 1.5
 @export var max_health := 100
+@export var damage := 20
 
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
@@ -16,7 +17,7 @@ const JUMP_VELOCITY = 4.5
 
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-var player: CharacterBody3D
+var player: Player
 var provoked := false
 
 var health := max_health:
@@ -49,7 +50,7 @@ func check_aggro() -> void: provoked = provoked or global_position.distance_to(p
 
 func attack_sequence() -> void: if global_position.distance_to(player.global_position) <= attack_range: animation_player.play("Attack")
 
-func attak() -> void: print("Attack!")
+func attak() -> void: player.health -= damage
 
 func apply_velocity() -> void:
 	var next_position = navigation_agent_3d.get_next_path_position()

@@ -1,8 +1,10 @@
+class_name Player
 extends CharacterBody3D
 
 
 @export_range(0.5, 2.0) var jump_height := 1.0
 @export_range(1.0, 5.0) var fall_multiplier := 2.5
+@export var max_health := 100
 
 
 @onready var camera_pivot: Node3D = %CameraPivot
@@ -14,6 +16,11 @@ const MOUSE_SENSITIVITY := .003
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mouse_motion := Vector2.ZERO
+
+var health := max_health:
+	set(value):
+		health = value
+		if health <= 0: get_tree().quit()
 
 
 func _ready() -> void:
