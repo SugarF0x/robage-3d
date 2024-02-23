@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl83pn44depr6"]
+
+[ext_resource type="Script" path="res://Weapons/hit_sparks.gd" id="1_fpv5x"]
+
+[sub_resource type="Curve" id="Curve_3d6dc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.97561, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hwats"]
+curve = SubResource("Curve_3d6dc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s8sjt"]
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_hwats")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qy2c"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tqpq1"]
+material = SubResource("StandardMaterial3D_4qy2c")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="HitSparks" type="GPUParticles3D"]
+emitting = false
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_s8sjt")
+draw_pass_1 = SubResource("BoxMesh_tqpq1")
+script = ExtResource("1_fpv5x")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

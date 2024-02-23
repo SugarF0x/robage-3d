@@ -6,6 +6,7 @@ extends Node3D
 @export var damage := 15
 @export var weapon_mesh: Node3D
 @export var muzzle_flash_particles: GPUParticles3D
+@export var hit_flash_particles: PackedScene
 
 
 @onready var cooldown_timer: Timer = %CooldownTimer
@@ -33,8 +34,12 @@ func shoot() -> void:
 	
 	muzzle_flash_particles.restart()
 	
-	apply_damage(ray_cast_3d.get_collider())
+	apply_damage(ray_cast_3d.get_collider(), ray_cast_3d.get_collision_point())
 
-func apply_damage(target) -> void:
+func apply_damage(target, hit_point: Vector3) -> void:
+	var hit_particles = hit_flash_particles.instantiate() as GPUParticles3D
+	add_child(hit_particles)
+	hit_particles.global_position = hit_point
+	
 	if target is Enemy: target.health -= damage
 	
