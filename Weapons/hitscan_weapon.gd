@@ -4,6 +4,7 @@ extends Node3D
 @export var fire_rate := 14.0
 @export var recoil := .05
 @export var weapon_mesh: Node3D
+@export var damage := 15
 
 
 @onready var cooldown_timer: Timer = %CooldownTimer
@@ -29,4 +30,8 @@ func shoot() -> void:
 	recoil_tween.tween_property(weapon_mesh, "position", Vector3(weapon_mesh.position.x, weapon_mesh.position.y, weapon_mesh.position.z + recoil), fire_duration / 2)
 	recoil_tween.tween_property(weapon_mesh, "position", weapon_mesh.position, fire_duration / 2)
 	
-	print(ray_cast_3d.get_collider())
+	apply_damage(ray_cast_3d.get_collider())
+
+func apply_damage(target) -> void:
+	if target is Enemy: target.health -= damage
+	

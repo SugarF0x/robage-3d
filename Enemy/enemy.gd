@@ -1,8 +1,10 @@
+class_name Enemy
 extends CharacterBody3D
 
 
 @export var aggro_range := 12.0
 @export var attack_range := 1.5
+@export var max_health := 100
 
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
@@ -16,6 +18,12 @@ const JUMP_VELOCITY = 4.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player: CharacterBody3D
 var provoked := false
+
+var health := max_health:
+	set(value): 
+		health = value
+		if health <= 0: queue_free()
+		provoked = true
 
 
 func _ready() -> void:
