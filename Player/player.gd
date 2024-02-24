@@ -2,23 +2,30 @@ class_name Player
 extends CharacterBody3D
 
 
+#region Exports
 @export_range(0.5, 2.0) var jump_height := 1.0
 @export_range(1.0, 5.0) var fall_multiplier := 2.5
 @export var max_health := 100
+#endregion
 
-
+#region On ready
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var player_health_label: Label = %PlayerHealthLabel
 @onready var damage_animation_player: AnimationPlayer = %DamageAnimationPlayer
+@onready var game_over_menu: GameOverMenu = $CanvasLayer/GameOverMenu
+#endregion
 
-
+#region Consts
 const SPEED := 5.0
 const MOUSE_SENSITIVITY := .003
+#endregion
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+#region Variables
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mouse_motion := Vector2.ZERO
+#endregion
 
+#region Smart variables
 var health := max_health:
 	set(value):
 		if (value < health): 
@@ -27,9 +34,10 @@ var health := max_health:
 			
 		health = value
 		update_health_label()
-		if health <= 0: get_tree().quit()
+		if health <= 0: game_over_menu.game_over()
+#endregion
 
-
+#region Overrides
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	update_health_label()
@@ -48,8 +56,9 @@ func _input(event: InputEvent) -> void:
 	
 	if not event is InputEventMouseMotion: return
 	mouse_motion = -event.relative * MOUSE_SENSITIVITY
+#endregion
 
-
+#region Own logic
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
 	
@@ -78,3 +87,4 @@ func handle_movement() -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func update_health_label(): player_health_label.text = "Health: " + str(health)
+#endregion
