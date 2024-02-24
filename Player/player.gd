@@ -9,6 +9,7 @@ extends CharacterBody3D
 
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var player_health_label: Label = %PlayerHealthLabel
+@onready var damage_animation_player: AnimationPlayer = %DamageAnimationPlayer
 
 
 const SPEED := 5.0
@@ -20,6 +21,10 @@ var mouse_motion := Vector2.ZERO
 
 var health := max_health:
 	set(value):
+		if (value < health): 
+			damage_animation_player.stop()
+			damage_animation_player.play("TakeDamage")
+			
 		health = value
 		update_health_label()
 		if health <= 0: get_tree().quit()
