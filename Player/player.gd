@@ -69,6 +69,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion: mouse_motion = -event.relative * MOUSE_SENSITIVITY
 	if Input.is_action_just_pressed("scroll_up"): weapon_index += 1
 	if Input.is_action_just_pressed("scroll_down"): weapon_index -= 1
+	if Input.is_action_just_pressed("ui_text_submit"): get_tree().reload_current_scene()
 #endregion
 
 #region Own logic
@@ -101,6 +102,8 @@ func handle_movement() -> void:
 
 func update_health_label(): player_health_label.text = "Health: " + str(health)
 
+# TODO: move this to a dedicated WeaponSlign script? question mark?
+
 func toggle_weapon_selection_state() -> void:
 	var weapon_node = weapon_sling.get_children()[weapon_index] as Node3D
 	if not weapon_node: return
@@ -118,8 +121,8 @@ func update_weapon_sling_labels() -> void:
 		var weapon = weapons[index]
 		var label = Label.new()
 		weapon_sling_label_container.add_child(label)
+		
 		label.name = weapon.name + "SlingLabel"
 		label.text = weapon.name
-		
 		if weapon_index != index: label.modulate.a = .5
 #endregion
