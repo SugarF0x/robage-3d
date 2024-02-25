@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxggjp3t0lo3y"]
+[gd_scene load_steps=8 format=3 uid="uid://dxggjp3t0lo3y"]
 
 [ext_resource type="FontFile" uid="uid://d1u2a5yl3qceq" path="res://Assets/Fonts/Staatliches-Regular.ttf" id="1_pvwrq"]
 [ext_resource type="Script" path="res://Player/game_over_menu.gd" id="2_nmqql"]
+[ext_resource type="Shader" uid="uid://df5fpchy840v3" path="res://Player/game_over_menu.tres" id="3_h64vr"]
 
 [sub_resource type="Theme" id="Theme_0f1oo"]
 default_font = ExtResource("1_pvwrq")
 default_font_size = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ly3rd"]
+shader = ExtResource("3_h64vr")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gw45h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tasce"]
 font_size = 96
@@ -20,6 +26,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_0f1oo")
 script = ExtResource("2_nmqql")
+
+[node name="BlurTextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ly3rd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_gw45h")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
