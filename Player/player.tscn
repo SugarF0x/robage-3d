@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player/player.gd" id="1_usll7"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_vcq0c"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_1s265"]
-[ext_resource type="PackedScene" uid="uid://dpf2id8liiugw" path="res://Weapons/smg.tscn" id="3_dss5l"]
+[ext_resource type="PackedScene" uid="uid://bjcdyt4i7cfmi" path="res://Weapons/rifle.tscn" id="3_gosfk"]
 [ext_resource type="Texture2D" uid="uid://dkneygrxmp001" path="res://Player/damage.png" id="4_8tbaw"]
 [ext_resource type="PackedScene" uid="uid://dxggjp3t0lo3y" path="res://Player/game_over_menu.tscn" id="6_wjtpa"]
 
@@ -93,7 +93,7 @@ script = ExtResource("2_vcq0c")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../CanvasLayer/SubViewportContainer/SubViewport/WeaponCamera")
 
-[node name="HitscanWeapon" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_dss5l")]
+[node name="Rifle" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_gosfk")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

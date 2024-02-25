@@ -4,6 +4,9 @@ extends Node3D
 @export var fire_rate := 14.0
 @export var recoil := .05
 @export var damage := 15
+@export var full_auto := true
+
+
 @export var weapon_mesh: Node3D
 @export var muzzle_flash_particles: GPUParticles3D
 @export var hit_flash_particles: PackedScene
@@ -13,14 +16,14 @@ extends Node3D
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
 
-func _ready() -> void:
-	pass
-
 func _process(delta: float) -> void:
 	if not Input.is_action_pressed("fire"): return
 	if not cooldown_timer.is_stopped(): return
 	
-	shoot()
+	if not full_auto:
+		if Input.is_action_just_pressed("fire"): shoot()
+	else:
+		shoot()
 
 
 func shoot() -> void:
