@@ -14,6 +14,7 @@ extends CharacterBody3D
 @onready var damage_animation_player: AnimationPlayer = %DamageAnimationPlayer
 @onready var game_over_menu: GameOverMenu = $CanvasLayer/GameOverMenu
 @onready var weapon_sling: Node3D = %WeaponSling
+@onready var weapon_sling_label_container: HBoxContainer = %WeaponSlingLabelContainer
 #endregion
 
 #region Consts
@@ -43,6 +44,7 @@ var weapon_index := 0:
 		toggle_weapon_selection_state()
 		weapon_index = value
 		toggle_weapon_selection_state()
+		update_weapon_sling_labels()
 #endregion
 
 #region Overrides
@@ -50,6 +52,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	update_health_label()
 	toggle_weapon_selection_state()
+	update_weapon_sling_labels()
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
@@ -104,4 +107,19 @@ func toggle_weapon_selection_state() -> void:
 	
 	weapon_node.visible = !weapon_node.visible
 	weapon_node.process_mode = Node.PROCESS_MODE_INHERIT if weapon_node.process_mode == Node.PROCESS_MODE_DISABLED else Node.PROCESS_MODE_DISABLED
+
+func update_weapon_sling_labels() -> void:
+	for label in weapon_sling_label_container.get_children():
+		weapon_sling_label_container.remove_child(label)
+		label.queue_free()
+	
+	var weapons = weapon_sling.get_children()
+	for index in range(weapons.size()):
+		var weapon = weapons[index]
+		var label = Label.new()
+		weapon_sling_label_container.add_child(label)
+		label.name = weapon.name + "SlingLabel"
+		label.text = weapon.name
+		
+		if weapon_index != index: label.modulate.a = .5
 #endregion
