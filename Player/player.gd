@@ -69,7 +69,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion: mouse_motion = -event.relative * MOUSE_SENSITIVITY
 	if Input.is_action_just_pressed("scroll_up"): weapon_index += 1
 	if Input.is_action_just_pressed("scroll_down"): weapon_index -= 1
-	if Input.is_action_just_pressed("ui_text_submit"): get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("restart"): get_tree().reload_current_scene()
 #endregion
 
 #region Own logic

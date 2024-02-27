@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2t8cplp6prl2"]
+[gd_scene load_steps=10 format=3 uid="uid://b2t8cplp6prl2"]
 
 [ext_resource type="Material" uid="uid://bfcw0tn2f76sy" path="res://Levels/Materials/GrayMaterial.tres" id="1_78o21"]
 [ext_resource type="PackedScene" uid="uid://1dm7xquufcns" path="res://Player/player.tscn" id="1_n1wis"]
 [ext_resource type="PackedScene" uid="uid://8x2kpqs6jj4c" path="res://Enemy/enemy.tscn" id="2_sttig"]
 [ext_resource type="Material" uid="uid://dcg5gp2j82fvr" path="res://Levels/Materials/OrangeMaterial.tres" id="3_0rd03"]
+[ext_resource type="Script" path="res://Levels/EnemyManager.gd" id="4_8fjes"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2t2of"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,9 +34,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_n1wis")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
-
-[node name="Enemy" parent="." instance=ExtResource("2_sttig")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_ok0yv")
@@ -199,3 +197,29 @@ radius = 3.0
 height = 1.0
 sides = 16
 material = ExtResource("3_0rd03")
+
+[node name="EnemyManager" type="Node3D" parent="."]
+script = ExtResource("4_8fjes")
+enemy_scene = ExtResource("2_sttig")
+
+[node name="SpawnPoints" type="Node3D" parent="EnemyManager"]
+
+[node name="SpawnPoint1" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25)
+
+[node name="SpawnPoint2" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0204, 1, 27.0372)
+
+[node name="SpawnPoint3" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9407, 1, -9.61545)
+
+[node name="SpawnPoint4" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.589, 2, -23.348)
+
+[node name="SpawnPoint5" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1462, 1, -12.2072)
+
+[node name="SpawnPoint6" type="Node3D" parent="EnemyManager/SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1462, 1, 11.0832)
+
+[node name="Enemies" type="Node3D" parent="EnemyManager"]
