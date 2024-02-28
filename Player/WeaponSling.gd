@@ -5,9 +5,8 @@ extends Node3D
 
 var weapon_index := 0:
 	set(value):
-		if value < 0 or value > get_children().size() - 1: return
 		toggle_weapon_selection_state()
-		weapon_index = value
+		weapon_index = wrapi(value, 0, get_children().size())
 		toggle_weapon_selection_state()
 		update_weapon_sling_labels()
 
@@ -19,8 +18,8 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	
-	if Input.is_action_just_pressed("scroll_up"): weapon_index += 1
-	if Input.is_action_just_pressed("scroll_down"): weapon_index -= 1
+	if Input.is_action_just_pressed("scroll_up") and event.is_pressed(): weapon_index += 1
+	if Input.is_action_just_pressed("scroll_down") and event.is_pressed(): weapon_index -= 1
 
 
 func toggle_weapon_selection_state() -> void:
