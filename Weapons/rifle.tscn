@@ -34,6 +34,7 @@ fire_rate = 8.0
 recoil = 0.3
 damage = 70
 full_auto = false
+ammo_type = 1
 weapon_mesh = NodePath("Rifle")
 muzzle_flash_particles = NodePath("MuzzleGizmo/MuzzleFlashParticles")
 hit_flash_particles = ExtResource("2_1kp0l")

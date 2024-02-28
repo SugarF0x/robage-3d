@@ -5,11 +5,13 @@ extends Node3D
 @export var recoil := .05
 @export var damage := 15
 @export var full_auto := true
+@export var ammo_type := AmmoPouch.AmmoType.SMALL
 
 
 @export var weapon_mesh: Node3D
 @export var muzzle_flash_particles: GPUParticles3D
 @export var hit_flash_particles: PackedScene
+@export var ammo_pouch: AmmoPouch
 
 
 @onready var cooldown_timer: Timer = %CooldownTimer
@@ -27,6 +29,8 @@ func _process(delta: float) -> void:
 
 
 func shoot() -> void:
+	if not ammo_pouch.use_ammo(ammo_type): return
+	
 	var fire_duration = 1.0 / fire_rate
 	cooldown_timer.start(fire_duration)
 	

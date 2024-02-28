@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://1dm7xquufcns"]
+[gd_scene load_steps=15 format=3 uid="uid://1dm7xquufcns"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_usll7"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_vcq0c"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bjcdyt4i7cfmi" path="res://Weapons/rifle.tscn" id="3_gosfk"]
 [ext_resource type="Script" path="res://Player/WeaponSling.gd" id="3_skecw"]
 [ext_resource type="Texture2D" uid="uid://dkneygrxmp001" path="res://Player/damage.png" id="4_8tbaw"]
+[ext_resource type="Script" path="res://Player/AmmoPouch.gd" id="6_3ag8h"]
 [ext_resource type="PackedScene" uid="uid://dxggjp3t0lo3y" path="res://Player/game_over_menu.tscn" id="6_wjtpa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_abywv"]
@@ -119,16 +120,23 @@ script = ExtResource("2_vcq0c")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../CanvasLayer/SubViewportContainer/SubViewport/WeaponCamera")
 
-[node name="WeaponSling" type="Node3D" parent="CameraPivot/SmoothCamera"]
+[node name="WeaponSling" type="Node3D" parent="CameraPivot/SmoothCamera" node_paths=PackedStringArray("ammo_pouch")]
 script = ExtResource("3_skecw")
+ammo_pouch = NodePath("../AmmoPouch")
 
-[node name="SMG" parent="CameraPivot/SmoothCamera/WeaponSling" instance=ExtResource("3_dss5l")]
+[node name="SMG" parent="CameraPivot/SmoothCamera/WeaponSling" node_paths=PackedStringArray("ammo_pouch") instance=ExtResource("3_dss5l")]
 process_mode = 4
 visible = false
+ammo_pouch = NodePath("../../AmmoPouch")
 
-[node name="Rifle" parent="CameraPivot/SmoothCamera/WeaponSling" instance=ExtResource("3_gosfk")]
+[node name="Rifle" parent="CameraPivot/SmoothCamera/WeaponSling" node_paths=PackedStringArray("ammo_pouch") instance=ExtResource("3_gosfk")]
 process_mode = 4
 visible = false
+ammo_pouch = NodePath("../../AmmoPouch")
+
+[node name="AmmoPouch" type="Node" parent="CameraPivot/SmoothCamera"]
+unique_name_in_owner = true
+script = ExtResource("6_3ag8h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -192,6 +200,24 @@ text = "Health text"
 [node name="WeaponSlingLabelContainer" type="HBoxContainer" parent="CanvasLayer/HUD/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="DummyWeaponLabel" type="Label" parent="CanvasLayer/HUD/VBoxContainer/WeaponSlingLabelContainer"]
+layout_mode = 2
+text = "Some Weapon"
+
+[node name="WeaponAmmoLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ammo: 999"
+horizontal_alignment = 2
 
 [node name="CrosshairContainer" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
