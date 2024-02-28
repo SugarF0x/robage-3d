@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://1dm7xquufcns"]
+[gd_scene load_steps=14 format=3 uid="uid://1dm7xquufcns"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_usll7"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_vcq0c"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_1s265"]
 [ext_resource type="PackedScene" uid="uid://dpf2id8liiugw" path="res://Weapons/smg.tscn" id="3_dss5l"]
 [ext_resource type="PackedScene" uid="uid://bjcdyt4i7cfmi" path="res://Weapons/rifle.tscn" id="3_gosfk"]
+[ext_resource type="Script" path="res://Player/WeaponSling.gd" id="3_skecw"]
 [ext_resource type="Texture2D" uid="uid://dkneygrxmp001" path="res://Player/damage.png" id="4_8tbaw"]
 [ext_resource type="PackedScene" uid="uid://dxggjp3t0lo3y" path="res://Player/game_over_menu.tscn" id="6_wjtpa"]
 
@@ -120,6 +121,7 @@ remote_path = NodePath("../../../CanvasLayer/SubViewportContainer/SubViewport/We
 
 [node name="WeaponSling" type="Node3D" parent="CameraPivot/SmoothCamera"]
 unique_name_in_owner = true
+script = ExtResource("3_skecw")
 
 [node name="SMG" parent="CameraPivot/SmoothCamera/WeaponSling" instance=ExtResource("3_dss5l")]
 process_mode = 4

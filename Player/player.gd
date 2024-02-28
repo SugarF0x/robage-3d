@@ -13,8 +13,6 @@ extends CharacterBody3D
 @onready var player_health_label: Label = %PlayerHealthLabel
 @onready var damage_animation_player: AnimationPlayer = %DamageAnimationPlayer
 @onready var game_over_menu: GameOverMenu = $CanvasLayer/GameOverMenu
-@onready var weapon_sling: Node3D = %WeaponSling
-@onready var weapon_sling_label_container: HBoxContainer = %WeaponSlingLabelContainer
 #endregion
 
 #region Consts
@@ -37,22 +35,12 @@ var health := max_health:
 		health = value
 		update_health_label()
 		if health <= 0: game_over_menu.game_over()
-		
-var weapon_index := 0:
-	set(value):
-		if value < 0 or value > weapon_sling.get_children().size() - 1: return
-		toggle_weapon_selection_state()
-		weapon_index = value
-		toggle_weapon_selection_state()
-		update_weapon_sling_labels()
 #endregion
 
 #region Overrides
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	update_health_label()
-	toggle_weapon_selection_state()
-	update_weapon_sling_labels()
 
 func _physics_process(delta: float) -> void:
 	handle_camera_rotation()
@@ -67,8 +55,6 @@ func _input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	
 	if event is InputEventMouseMotion: mouse_motion = -event.relative * MOUSE_SENSITIVITY
-	if Input.is_action_just_pressed("scroll_up"): weapon_index += 1
-	if Input.is_action_just_pressed("scroll_down"): weapon_index -= 1
 	if Input.is_action_just_pressed("restart"): get_tree().reload_current_scene()
 #endregion
 
@@ -101,28 +87,4 @@ func handle_movement() -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func update_health_label(): player_health_label.text = "Health: " + str(health)
-
-# TODO: move this to a dedicated WeaponSlign script? question mark?
-
-func toggle_weapon_selection_state() -> void:
-	var weapon_node = weapon_sling.get_children()[weapon_index] as Node3D
-	if not weapon_node: return
-	
-	weapon_node.visible = !weapon_node.visible
-	weapon_node.process_mode = Node.PROCESS_MODE_INHERIT if weapon_node.process_mode == Node.PROCESS_MODE_DISABLED else Node.PROCESS_MODE_DISABLED
-
-func update_weapon_sling_labels() -> void:
-	for label in weapon_sling_label_container.get_children():
-		weapon_sling_label_container.remove_child(label)
-		label.queue_free()
-	
-	var weapons = weapon_sling.get_children()
-	for index in range(weapons.size()):
-		var weapon = weapons[index]
-		var label = Label.new()
-		weapon_sling_label_container.add_child(label)
-		
-		label.name = weapon.name + "SlingLabel"
-		label.text = weapon.name
-		if weapon_index != index: label.modulate.a = .5
 #endregion
