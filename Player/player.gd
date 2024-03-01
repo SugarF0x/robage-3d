@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var player_health_label: Label = %PlayerHealthLabel
 @onready var damage_animation_player: AnimationPlayer = %DamageAnimationPlayer
 @onready var game_over_menu: GameOverMenu = $CanvasLayer/GameOverMenu
+@onready var ammo_pouch: AmmoPouch = %AmmoPouch
 #endregion
 
 #region Consts
@@ -87,4 +88,6 @@ func handle_movement() -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func update_health_label(): player_health_label.text = "Health: " + str(health)
+
+func add_ammo(ammo_type: AmmoPouch.AmmoType, amount: int) -> void: ammo_pouch.add(ammo_type, amount)
 #endregion
