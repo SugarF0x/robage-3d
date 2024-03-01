@@ -2,6 +2,9 @@ class_name Enemy
 extends CharacterBody3D
 
 
+signal death
+
+
 @export var aggro_range := 12.0
 @export var attack_range := 1.5
 @export var max_health := 100
@@ -22,9 +25,11 @@ var provoked := false
 
 var health := max_health:
 	set(value): 
+		if health > value: provoked = true
 		health = value
-		if health <= 0: queue_free()
-		provoked = true
+		if health <= 0: 
+			death.emit()
+			queue_free()
 
 
 func _ready() -> void:
