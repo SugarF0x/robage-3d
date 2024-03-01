@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2t8cplp6prl2"]
+[gd_scene load_steps=12 format=3 uid="uid://b2t8cplp6prl2"]
 
 [ext_resource type="Material" uid="uid://bfcw0tn2f76sy" path="res://Levels/Materials/GrayMaterial.tres" id="1_78o21"]
 [ext_resource type="PackedScene" uid="uid://1dm7xquufcns" path="res://Player/player.tscn" id="1_n1wis"]
 [ext_resource type="PackedScene" uid="uid://8x2kpqs6jj4c" path="res://Enemy/enemy.tscn" id="2_sttig"]
 [ext_resource type="Material" uid="uid://dcg5gp2j82fvr" path="res://Levels/Materials/OrangeMaterial.tres" id="3_0rd03"]
 [ext_resource type="Script" path="res://Levels/EnemyManager.gd" id="4_8fjes"]
-[ext_resource type="PackedScene" uid="uid://dxa0o4d02tfy0" path="res://PickUps/pick_up.tscn" id="6_m6ula"]
+[ext_resource type="PackedScene" uid="uid://caghst61dc8ga" path="res://PickUps/small_bullet_pickup.tscn" id="6_6e2o4"]
+[ext_resource type="PackedScene" uid="uid://cgj70x77b16uf" path="res://PickUps/large_bullet_pickup.tscn" id="7_l26g3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2t2of"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -225,5 +226,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1462, 1, 11.0832)
 
 [node name="Enemies" type="Node3D" parent="EnemyManager"]
 
-[node name="PickUp" parent="." instance=ExtResource("6_m6ula")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.902316, 2, 10.7256)
+[node name="PickUps" type="Node3D" parent="."]
+
+[node name="SmallBulletPickup" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, -1.0207, 2, 10.9982)
+
+[node name="SmallBulletPickup2" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, -4.0283, 3, 17.9363)
+
+[node name="SmallBulletPickup3" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 5.89822, 4, 18.9644)
+
+[node name="SmallBulletPickup4" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 18.9854, 6, 18.9644)
+
+[node name="SmallBulletPickup5" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 19.9655, 5, 9.97084)
+
+[node name="SmallBulletPickup6" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 24.8872, 6, -1.0856)
+
+[node name="SmallBulletPickup7" parent="PickUps" instance=ExtResource("6_6e2o4")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 20.7026, 6, -17.8423)
+
+[node name="LargeBulletPickup" parent="PickUps" instance=ExtResource("7_l26g3")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, -21.6888, 6, 0)
+
+[node name="LargeBulletPickup2" parent="PickUps" instance=ExtResource("7_l26g3")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, -24.7917, 6, 21.557)
+
+[node name="LargeBulletPickup3" parent="PickUps" instance=ExtResource("7_l26g3")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, -19.5792, 6, -22.2368)
+
+[node name="LargeBulletPickup4" parent="PickUps" instance=ExtResource("7_l26g3")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 24.2688, 6, -20.2855)
+
+[node name="LargeBulletPickup5" parent="PickUps" instance=ExtResource("7_l26g3")]
+transform = Transform3D(-0.918292, 0, 0.395904, 0, 1, 0, -0.395904, 0, -0.918292, 24.7284, 6, 22.4247)
