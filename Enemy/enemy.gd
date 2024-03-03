@@ -12,7 +12,8 @@ signal death
 
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
 
 const SPEED = 5.0
@@ -52,7 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func check_aggro() -> void: provoked = provoked or global_position.distance_to(player.global_position) <= aggro_range
 
-func attack_sequence() -> void: if global_position.distance_to(player.global_position) <= attack_range: animation_player.play("Attack")
+func attack_sequence() -> void: if global_position.distance_to(player.global_position) <= attack_range: playback.travel("Attack")
 
 func attak() -> void: player.health -= damage
 
