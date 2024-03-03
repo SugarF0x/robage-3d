@@ -27,7 +27,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ibvah")
 [sub_resource type="Environment" id="Environment_vi7qn"]
 background_mode = 2
 sky = SubResource("Sky_dd3r8")
-tonemap_mode = 2
+tonemap_mode = 3
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hwvt3"]
@@ -72,6 +72,8 @@ environment = SubResource("Environment_vi7qn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.666667, 0.866667, 1, 1)
+light_energy = 0.5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12, 0.1, 3)
