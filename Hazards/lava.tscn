@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dahg53033k4wj"]
+
+[ext_resource type="Material" uid="uid://blkvcfyoemekc" path="res://Hazards/lava_material.tres" id="1_pp60n"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0fh64"]
+size = Vector2(10, 10)
+
+[node name="Lava" type="Area3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_pp60n")
+mesh = SubResource("PlaneMesh_0fh64")
