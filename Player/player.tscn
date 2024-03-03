@@ -220,7 +220,13 @@ layout_mode = 2
 text = "Some Weapon"
 label_settings = ExtResource("9_4in0x")
 
-[node name="WeaponAmmoLabel" type="Label" parent="CanvasLayer/HUD"]
+[node name="AmmoPouchLabelContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="WeaponAmmoLabel" type="Label" parent="CanvasLayer/HUD/AmmoPouchLabelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
