@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d00ifxusrdkc7"]
+[gd_scene load_steps=29 format=3 uid="uid://d00ifxusrdkc7"]
 
 [ext_resource type="Texture2D" uid="uid://ccpho6ueow8cc" path="res://Levels/level-floorplan.png" id="1_exs0b"]
 [ext_resource type="Material" uid="uid://bfcw0tn2f76sy" path="res://Levels/Materials/GrayMaterial.tres" id="1_tf8er"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://8k76a0dt4f8r" path="res://Assets/Props/Floor.glb" id="8_5cv7w"]
 [ext_resource type="PackedScene" uid="uid://dm7x6brbkcpl1" path="res://Assets/Props/FloorTile.glb" id="9_vgf7b"]
 [ext_resource type="PackedScene" uid="uid://brt1uxnsi6v7v" path="res://Assets/Props/Cap.glb" id="10_alx5n"]
+[ext_resource type="PackedScene" uid="uid://c6b70qi2fv4ad" path="res://Assets/Props/Light.glb" id="12_2bbdp"]
 [ext_resource type="PackedScene" uid="uid://nagd04xbud7e" path="res://Assets/Props/Pillar.glb" id="12_ei4j5"]
 [ext_resource type="PackedScene" uid="uid://bmepk7nvytuo4" path="res://Assets/Props/Pipes.glb" id="13_n758g"]
 [ext_resource type="PackedScene" uid="uid://yp45s61xmrn0" path="res://Assets/Props/Vent.glb" id="14_0tnik"]
+[ext_resource type="PackedScene" uid="uid://cplw5v75yajau" path="res://Assets/Props/Screen.glb" id="16_nwoc0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ibvah"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -477,26 +479,114 @@ transform = Transform3D(0.182115, 0, 0.983277, 0, 1, 0, -0.983277, 0, 0.182115, 
 
 [node name="Roofing" type="Node3D" parent="Props"]
 
-[node name="Cap" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Dishes" type="Node3D" parent="Props/Roofing"]
+
+[node name="Cap" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, -8, 3, 14)
 
-[node name="Cap2" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap2" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -16, 2.51982, 14)
 
-[node name="Cap3" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap3" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, -25, 5.99947, 14)
 
-[node name="Cap4" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap4" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, -33, 5.99947, -2)
 
-[node name="Cap5" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap5" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, -11, 5.99947, -4)
 
-[node name="Cap6" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap6" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11, 5.99947, -5)
 
-[node name="Cap7" parent="Props/Roofing" instance=ExtResource("10_alx5n")]
+[node name="Cap7" parent="Props/Roofing/Dishes" instance=ExtResource("10_alx5n")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11, 5.99947, 10)
+
+[node name="Lights" type="Node3D" parent="Props/Roofing"]
+
+[node name="Light" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.48303, 3.01256, 18.1573)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light2" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.48303, 3.01256, 10.1573)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light6" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36.6301, 6.01245, 13.9045)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light7" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -29.8503, 6.01245, -0.942852)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light3" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -22.483, 1.44934, 9.49399)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light4" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -26.4553, 1.44934, 9.49399)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="Light5" parent="Props/Roofing/Lights" instance=ExtResource("12_2bbdp")]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -30.6315, 1.44934, 9.49399)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Props/Roofing/Lights/Light5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429236, 0)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+light_energy = 2.0
+light_specular = 0.75
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.25
 
 [node name="Wall" type="Node3D" parent="Props"]
 
@@ -587,7 +677,43 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.17021
 [node name="Vent9" parent="Props/Wall/Vents" instance=ExtResource("14_0tnik")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.17021, 5, 3.3824)
 
+[node name="Objects" type="Node3D" parent="Props"]
+
+[node name="Screen" parent="Props/Objects" instance=ExtResource("16_nwoc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4966, 0.688406, 10.2496)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Props/Objects/Screen"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.191616, 0.172115, -0.0657873)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+shadow_enabled = true
+
+[node name="Screen2" parent="Props/Objects" instance=ExtResource("16_nwoc0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36.7819, 3.68841, 6.93484)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Props/Objects/Screen2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.191616, 0.172115, -0.0657873)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+shadow_enabled = true
+
+[node name="Screen3" parent="Props/Objects" instance=ExtResource("16_nwoc0")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -28.5941, 3.68841, 2.85048)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Props/Objects/Screen3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.191616, 0.172115, -0.0657873)
+light_color = Color(0.568627, 0.909804, 0.956863, 1)
+shadow_enabled = true
+
 [editable path="Hazards/Lava"]
 [editable path="Hazards/Lava2"]
 [editable path="Hazards/Lava3"]
 [editable path="Hazards/Lava4"]
+[editable path="Props/Roofing/Lights/Light"]
+[editable path="Props/Roofing/Lights/Light2"]
+[editable path="Props/Roofing/Lights/Light6"]
+[editable path="Props/Roofing/Lights/Light7"]
+[editable path="Props/Roofing/Lights/Light3"]
+[editable path="Props/Roofing/Lights/Light4"]
+[editable path="Props/Roofing/Lights/Light5"]
+[editable path="Props/Objects/Screen"]
+[editable path="Props/Objects/Screen2"]
+[editable path="Props/Objects/Screen3"]
