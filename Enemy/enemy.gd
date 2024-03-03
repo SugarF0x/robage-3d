@@ -16,7 +16,6 @@ signal death
 
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
 
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
