@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ca7ffyd3q6oej"]
+
+[ext_resource type="FontFile" uid="uid://d1u2a5yl3qceq" path="res://Assets/Fonts/Staatliches-Regular.ttf" id="1_diotb"]
+
+[resource]
+font = ExtResource("1_diotb")

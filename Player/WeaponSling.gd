@@ -7,6 +7,9 @@ extends Node3D
 @onready var weapon_sling_label_container: HBoxContainer = %WeaponSlingLabelContainer
 
 
+const DEFAULT_LABEL_SETTINGS = preload("res://UI/default_label_settings.tres")
+
+
 var weapon_index := 0:
 	set(value):
 		toggle_weapon_selection_state()
@@ -44,10 +47,12 @@ func update_weapon_sling_labels() -> void:
 	for index in range(weapons.size()):
 		var weapon = weapons[index]
 		var label = Label.new()
-		weapon_sling_label_container.add_child(label)
 		
+		label.label_settings = DEFAULT_LABEL_SETTINGS
 		label.name = weapon.name + "SlingLabel"
 		label.text = weapon.name
 		if weapon_index != index: label.modulate.a = .5
+		
+		weapon_sling_label_container.add_child(label)
 
 func update_pouch_ammo_type() -> void: ammo_pouch.active_ammo_type = get_children()[weapon_index].ammo_type

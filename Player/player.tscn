@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://1dm7xquufcns"]
+[gd_scene load_steps=19 format=3 uid="uid://1dm7xquufcns"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_usll7"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_vcq0c"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Player/AmmoPouch.gd" id="6_3ag8h"]
 [ext_resource type="PackedScene" uid="uid://dxggjp3t0lo3y" path="res://Player/game_over_menu.tscn" id="6_wjtpa"]
 [ext_resource type="FontFile" uid="uid://d1u2a5yl3qceq" path="res://Assets/Fonts/Staatliches-Regular.ttf" id="8_lxe8p"]
+[ext_resource type="LabelSettings" uid="uid://ca7ffyd3q6oej" path="res://UI/default_label_settings.tres" id="9_4in0x"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_abywv"]
 
@@ -217,6 +218,7 @@ layout_mode = 2
 [node name="DummyWeaponLabel" type="Label" parent="CanvasLayer/HUD/VBoxContainer/WeaponSlingLabelContainer"]
 layout_mode = 2
 text = "Some Weapon"
+label_settings = ExtResource("9_4in0x")
 
 [node name="WeaponAmmoLabel" type="Label" parent="CanvasLayer/HUD"]
 unique_name_in_owner = true
