@@ -12,8 +12,8 @@ enum AmmoType {
 
 
 var ammo_storage := {
-	AmmoType.SMALL: 60,
-	AmmoType.LARGE: 10
+	AmmoType.SMALL: 0,
+	AmmoType.LARGE: 0
 }
 
 
