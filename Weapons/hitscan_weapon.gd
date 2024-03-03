@@ -44,6 +44,8 @@ func shoot() -> void:
 	apply_damage(ray_cast_3d.get_collider(), ray_cast_3d.get_collision_point())
 
 func apply_damage(target, hit_point: Vector3) -> void:
+	if not ray_cast_3d.is_colliding(): return
+	
 	var hit_particles = hit_flash_particles.instantiate() as GPUParticles3D
 	add_child(hit_particles)
 	hit_particles.global_position = hit_point
