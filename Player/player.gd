@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export_range(1.0, 5.0) var fall_multiplier := 2.5
 @export var max_health := 100
 @export var zoom_multiplier := .7
+@export var speed := 8.0
 #endregion
 
 #region On ready
@@ -23,7 +24,6 @@ extends CharacterBody3D
 #endregion
 
 #region Consts
-const SPEED := 5.0
 const MOUSE_SENSITIVITY := .003
 #endregion
 
@@ -90,11 +90,11 @@ func handle_movement() -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	if Input.is_action_pressed("aim"):
 		velocity.x *= zoom_multiplier
