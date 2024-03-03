@@ -118,7 +118,6 @@ anim_player = NodePath("../AnimationPlayer")
 shape = SubResource("CapsuleShape3D_bmf65")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 
 [node name="Drone2" parent="." instance=ExtResource("2_sv4mm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
