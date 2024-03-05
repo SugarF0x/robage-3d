@@ -24,7 +24,7 @@ extends CharacterBody3D
 #endregion
 
 #region Consts
-const MOUSE_SENSITIVITY := .003
+const MOUSE_SENSITIVITY := .002
 #endregion
 
 #region Variables
@@ -64,11 +64,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	
-	if event is InputEventMouseMotion: mouse_motion = -event.relative * MOUSE_SENSITIVITY * zoom_multiplier if Input.is_action_pressed("aim") else -event.relative * MOUSE_SENSITIVITY
+	if event is InputEventMouseMotion: mouse_motion = -event.relative * get_mouse_sensitivity_multiplier()
 	if Input.is_action_just_pressed("restart"): get_tree().reload_current_scene()
 #endregion
 
 #region Own logic
+func get_mouse_sensitivity_multiplier() -> float:
+	var width = get_viewport().size.x
+	var project_width = ProjectSettings.get_setting_with_override("display/window/size/viewport_width")
+	var zoom_factor = zoom_multiplier if Input.is_action_pressed("aim") else 1
+	return MOUSE_SENSITIVITY * zoom_factor * width / project_width
+
 func handle_camera_rotation() -> void:
 	rotate_y(mouse_motion.x)
 	
